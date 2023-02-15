@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use(comicsRoutes);
+app.use(charRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Serveur is running on PORT : ${process.env.PORT}`);
