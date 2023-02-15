@@ -16,6 +16,7 @@ mongoose.connect(process.env.DB_URI);
 
 app.use(comicsRoutes);
 app.use(charRoutes);
+app.use(userRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Serveur is running on PORT : ${process.env.PORT}`);

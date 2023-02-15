@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { isEmail } = require("validator");
 
 const User = mongoose.model("User", {
   username: {
@@ -12,7 +11,7 @@ const User = mongoose.model("User", {
   email: {
     type: String,
     required: true,
-    validate: [isEmail],
+
     unique: true,
     trim: true,
   },
@@ -22,7 +21,7 @@ const User = mongoose.model("User", {
     maxlength: 300,
     minlength: 6,
   },
-  picture: {
+  pictureUrl: {
     type: String,
     default: "// NO PICTURE HERE \\",
   },
