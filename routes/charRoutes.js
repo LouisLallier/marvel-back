@@ -30,4 +30,21 @@ router.get("/chars", async (req, res) => {
   }
 });
 
+router.get("/char/:id", async (req, res) => {
+  try {
+    const { apiKey } = req.query;
+    const thisCharId = req.params.id;
+    console.log(thisCharId);
+    console.log(apiKey);
+    if (thisCharId) {
+      const response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/character/${thisCharId}?apiKey=${apiKey}`
+      );
+      res.status(200).json(response.data);
+    }
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+});
+
 module.exports = router;

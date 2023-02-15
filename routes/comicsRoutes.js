@@ -31,12 +31,12 @@ router.get("/comics", async (req, res) => {
 router.get("/comics/:id", async (req, res) => {
   try {
     const { apiKey } = req.query;
-    const comicId = req.params.id;
-    console.log(comicId);
+    const charId = req.params.id;
+    console.log(charId);
     console.log(apiKey);
-    if (comicId) {
+    if (charId) {
       const response = await axios.get(
-        `https://lereacteur-marvel-api.herokuapp.com/comics/${comicId}?apiKey=${apiKey}`
+        `https://lereacteur-marvel-api.herokuapp.com/comics/${charId}?apiKey=${apiKey}`
       );
       res.status(200).json(response.data);
     }
