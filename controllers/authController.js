@@ -1,6 +1,12 @@
 const UserModel = require("../models/User");
 const bcrypt = require("bcrypt");
-const { hash } = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET_TOKEN, {
+    expiresIn: 180000000000000,
+  });
+};
 
 module.exports.signUp = async (req, res) => {
   try {
@@ -28,5 +34,30 @@ module.exports.signUp = async (req, res) => {
     }
   } catch (e) {
     res.status(400).json({ message: e.message });
+  }
+};
+
+module.exports.signIn = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email });
+    if (user) {
+      const auth = await bcrypt.compare(password, user.password);
+      console.log(auth);
+      if (auth) {
+        const token = createToken(user._id);
+        if (token) {
+          res.status(201).json({ token, user });
+        }
+      } else {
+        res.status(400).json("wrong password");
+      }
+    } else {
+      res.status(400).json("wrong email");
+    }
+    console.log(user);
+  } catch (e) {
+    console.log(e);
+    res.status(401).json({ e });
   }
 };

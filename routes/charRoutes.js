@@ -33,7 +33,7 @@ router.get("/char/:id", async (req, res) => {
   try {
     const thisCharId = req.params.id;
     console.log(thisCharId);
-    console.log(apiKey);
+
     if (thisCharId) {
       const response = await axios.get(
         `https://lereacteur-marvel-api.herokuapp.com/character/${thisCharId}?apiKey=${process.env.API_KEY}`
