@@ -6,7 +6,6 @@ const axios = require("axios");
 router.get("/comics", async (req, res) => {
   let { limit, skip, title } = await req.query;
 
-  console.log(limit);
   if (!limit) {
     limit = "";
   }
@@ -22,7 +21,6 @@ router.get("/comics", async (req, res) => {
     );
     const comics = response.data;
     res.status(200).json(comics);
-    console.log(response.data);
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
@@ -31,7 +29,7 @@ router.get("/comics", async (req, res) => {
 router.get("/comics/:id", async (req, res) => {
   try {
     const charId = req.params.id;
-    console.log(charId);
+
     if (charId) {
       const response = await axios.get(
         `https://lereacteur-marvel-api.herokuapp.com/comics/${charId}?apiKey=${process.env.API_KEY}`
