@@ -1,5 +1,5 @@
 const express = require("express");
-const axios = require("axios");
+const { marvelAPI } = require("../apis");
 const router = express.Router();
 
 router.get("/chars", async (req, res) => {
@@ -18,8 +18,8 @@ router.get("/chars", async (req, res) => {
     name = "";
   }
   try {
-    const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=${limitChars}&skip=${skipChars}&name=${name}`
+    const response = await marvelAPI.get(
+      `/characters?limit=${limitChars}&skip=${skipChars}&name=${name}`
     );
     const chars = response.data;
     res.status(200).json(chars);
@@ -35,9 +35,7 @@ router.get("/char/:id", async (req, res) => {
     console.log(thisCharId);
 
     if (thisCharId) {
-      const response = await axios.get(
-        `https://lereacteur-marvel-api.herokuapp.com/character/${thisCharId}?apiKey=${process.env.API_KEY}`
-      );
+      const response = await marvelAPI.get(`/character/${thisCharId}`);
       res.status(200).json(response.data);
     }
   } catch (e) {

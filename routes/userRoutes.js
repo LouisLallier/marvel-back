@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const fileUpload = require("express-fileupload");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 
 /// authentification AUTH CONTROLLER
-router.post("/signup", authController.signUp);
+router.post("/signup", fileUpload(), authController.signUp);
 router.post("/signin", authController.signIn);
+router.get("/info/:id", authController.userInfo);
 
 /// HANDLE FAVORITES
-router.put("/addfav/:userId/:comicId", userController.addFav);
-router.put("/remove/:userId/:comicId", userController.removeFav);
+router.put("/addfav", userController.addFav);
+router.put("/remove", userController.removeFav);
 
 module.exports = router;
