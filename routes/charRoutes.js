@@ -23,7 +23,6 @@ router.get("/chars", async (req, res) => {
     );
     const chars = response.data;
     res.status(200).json(chars);
-    console.log(response.data);
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
@@ -32,7 +31,6 @@ router.get("/chars", async (req, res) => {
 router.get("/char/:id", async (req, res) => {
   try {
     const thisCharId = req.params.id;
-    console.log(thisCharId);
 
     if (thisCharId) {
       const response = await marvelAPI.get(`/character/${thisCharId}`);

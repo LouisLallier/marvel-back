@@ -39,7 +39,6 @@ module.exports.addFav = async (req, res) => {
         .json(`${id} bas been added to ${user.username} favorites`);
     }
   } catch (e) {
-    console.log("catch");
     res.status(400).json({ message: e.message });
   }
 };
@@ -52,10 +51,7 @@ module.exports.removeFav = async (req, res) => {
       const user = await UserModel.findById(userId);
       const newTab = [...user.favorites];
       user.favorites.map((fav, index) => {
-        console.log(fav.comicId);
-        console.log(id);
         if (fav.comicId === id) {
-          console.log(index);
           return newTab.splice(index, 1);
         }
       });
@@ -64,7 +60,6 @@ module.exports.removeFav = async (req, res) => {
       res
         .status(200)
         .json(`${id} bas been removed from ${user.username} favorites`);
-      // console.log(user.favorites);
     } else {
       return;
     }

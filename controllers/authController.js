@@ -24,7 +24,6 @@ module.exports.signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const file = req.files.picture;
-    console.log(file);
     const saltRounds = 10;
 
     const user = await UserModel.findOne({ email: email, username: username });
@@ -49,7 +48,6 @@ module.exports.signUp = async (req, res) => {
           const token = createToken(user._id);
 
           res.status(201).json({ user, token });
-          console.log(user);
         });
       }
     }
@@ -64,14 +62,11 @@ module.exports.signIn = async (req, res) => {
     const user = await UserModel.findOne({ email });
     if (user) {
       const auth = await bcrypt.compare(password, user.password);
-      console.log(auth);
 
       const token = createToken(user._id);
       res.status(201).json({ token, user });
     }
-    console.log(user);
   } catch (e) {
-    console.log(e);
     res.status(401).json({ e });
   }
 };
