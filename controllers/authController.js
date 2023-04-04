@@ -34,10 +34,12 @@ module.exports.signUp = async (req, res) => {
     } else {
       if (username && email && password) {
         bcrypt.hash(password, saltRounds, async (err, hash) => {
-          const result = await cloudinary.uploader.upload(
-            convertToBase64(file),
-            { folder: `Marvel/user/${email}` }
-          );
+          let result = await cloudinary.uploader.upload(convertToBase64(file), {
+            folder: `Marvel/user/${email}`,
+          });
+          if (!result) {
+            result = "";
+          }
 
           const user = await UserModel.create({
             username,

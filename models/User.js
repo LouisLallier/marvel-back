@@ -24,7 +24,7 @@ const User = mongoose.model("User", {
   },
   pictureUrl: {
     type: String,
-    default: avatar,
+
     required: false,
   },
   favorites: {
