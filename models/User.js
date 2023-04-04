@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const avatar = require("../assets/2709_R0lVIE5JQyA2MDctNDM.jpg");
 
 const User = mongoose.model("User", {
   username: {
@@ -23,7 +24,8 @@ const User = mongoose.model("User", {
   },
   pictureUrl: {
     type: String,
-    default: "// NO PICTURE HERE \\",
+    default: avatar,
+    required: false,
   },
   favorites: {
     default: [],
