@@ -23,11 +23,12 @@ const createToken = (id) => {
 module.exports.signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    let file = req.files.picture;
-    const saltRounds = 10;
-    if (!file) {
-      file = "";
+    let file = "";
+    if (req.files.picture) {
+      file = req.files.picture;
     }
+
+    const saltRounds = 10;
 
     const user = await UserModel.findOne({ email: email, username: username });
     if (user) {
