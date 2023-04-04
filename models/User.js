@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const avatar = require("../assets/2709_R0lVIE5JQyA2MDctNDM.jpg");
 
 const User = mongoose.model("User", {
   username: {

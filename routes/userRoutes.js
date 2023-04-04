@@ -5,7 +5,7 @@ const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 
 /// authentification AUTH CONTROLLER
-router.post("/signup", fileUpload(), authController.signxUp);
+router.post("/signup", fileUpload(), authController.signUp);
 router.post("/signin", authController.signIn);
 router.get("/info/:id", authController.userInfo);
 
